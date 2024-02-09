@@ -1,0 +1,175 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="submit"],
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group input[type="submit"]:hover,
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        ul li .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        ul li .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Add User</h2>
+            <form action="/add_user" method="post" class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <input type="submit" value="Add User">
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Grant Permissions</h2>
+            <form action="/grant_permissions" method="post" class="form-group">
+                <label for="username">Username:</label>
+                <select id="username" name="username" required>
+                    {% for user in users %}
+                        <option value="{{ user["User"] }}">{{ user["User"] }}</option>
+                    {% endfor %}
+                </select>
+                <label for="database">Database:</label>
+                <select id="database" name="database" required>
+                    {% for db in databases %}
+                        <option value="{{ db["Database"] }}">{{ db["Database"] }}</option>
+                    {% endfor %}
+                </select>
+                <label>Permissions:</label><br>
+                <input type="checkbox" id="select" name="select" value="SELECT">
+                <label for="select">Select</label><br>
+                <input type="checkbox" id="insert" name="insert" value="INSERT">
+                <label for="insert">Insert</label><br>
+                <input type="checkbox" id="update" name="update" value="UPDATE">
+                <label for="update">Update</label><br>
+                <input type="submit" value="Grant Permissions">
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>User List</h2>
+            <ul>
+                {% for user in users %}
+                    <li>
+                        {{ user.User }} ({{ user.Host }})
+                        <form action="/delete_user/{{ user.User }}" method="post" style="display:inline;">
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Change Password</h2>
+            <form action="/change_password" method="post" class="form-group">
+                <label for="username">Username:</label>
+                <select id="username" name="username" required>
+                    {% for user in users %}
+                        <option value="{{ user["User"] }}">{{ user["User"] }}</option>
+                    {% endfor %}
+                </select>
+                <label for="new_password">New Password:</label>
+                <input type="password" id="new_password" name="new_password" required>
+                <input type="submit" value="Change Password">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

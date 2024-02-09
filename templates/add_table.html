@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Table</title>
+</head>
+<body>
+    <a href="{{ url_for('show_tables') }}">Back to Tables</a>
+    
+    <h1>Add New Table</h1>
+    <form action="{{ url_for('add_table') }}" method="POST">
+        <label for="table_name">New Table Name:</label>
+        <input type="text" id="table_name" name="table_name" required><br>
+        <!-- Diğer gerekli alanları buraya ekleyebilirsiniz -->
+        <input type="submit" value="Add Table">
+    </form>
+
+    
+</body>
+</html>
+{% endblock %}

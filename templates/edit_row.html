@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Row</title>
+</head>
+<body>
+    <h1>Edit Row</h1>
+    <form method="POST">
+        <table>
+            {% for column in columns[1:] %}
+                <tr>
+                    <td>{{ column }}</td>
+                    <td><input type="text" name="{{ column }}" value="{{ row_data[column] }}"></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>
+{% endblock %}

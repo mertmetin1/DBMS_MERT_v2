@@ -1,0 +1,28 @@
+
+{% extends 'layout.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Column</title>
+</head>
+<body>
+    <h1>Edit Column - {{ table_name }} - {{ column_name }}</h1>
+    <form action="{{ url_for('edit_column', table_name=table_name, column_name=column_name) }}" method="post">
+        <label for="new_column_name">New Column Name:</label>
+        <input type="text" id="new_column_name" name="new_column_name" value={{ column_name }} required>
+        <br><br>
+        <label for="data_type">Data Type:</label>
+        <select id="data_type" name="data_type">
+            {% for data_type in data_types %}
+                <option value="{{ data_type }}">{{ data_type }}</option>
+            {% endfor %}
+        </select><br>
+        <br><br>
+        <input type="submit" value="Update Column">
+    </form>
+</body>
+</html>
+{% endblock %}

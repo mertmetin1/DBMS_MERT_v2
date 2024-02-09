@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Table - {{ table_name }}</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            white-space: nowrap;
+            table-layout: fixed;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-bottom: 0;
+        }
+        .warning {
+            color: red;
+            font-size: 20px;
+            font-style: italic;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<!-- ... -->
+<body>
+    <h1>Table : {{ table_name }} </h1>
+    
+
+    
+    <br>
+    <form action="{{ url_for('add_row', table_name=table_name) }}" method="get">
+        <button type="submit">Add New Row</button>
+    </form>
+    <table>
+        <tr>
+            {% for column in columns %}
+                <th>{{ column }}</th>
+            {% endfor %}
+            <th>İşlemler</th>
+        </tr>
+
+        <!-- ... -->
+        {% for row in rows %}
+            <tr>
+                
+                {% for column in columns %}
+                
+                    <td>{{ row[column] }} </td>
+
+                {% endfor %}
+                <td>
+                    <a class="btn btn-warning" href="{{ url_for('edit_row', table_name=table_name, row_id=row[table_name + '_id']) }}">Düzenle</a>
+                    <form method="POST" action="{{ url_for('delete_row', table_name=table_name, column_name=table_name, row_id=row[table_name + '_id']) }}">
+                       
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                
+                </td>
+                
+            </tr>
+
+        {% endfor %}
+        <!-- ... -->
+    </table>
+    <label hidden for="primary_key_column">Primary Key Column Name:</label>
+    <input  hidden type="text" Value="{{ table_name }}_id" id="primary_key_column" name="primary_key_column" required><br><br>
+    
+</body>
+<!-- ... -->
+
+</html>
+
+{% endblock %}
+
+
+
+

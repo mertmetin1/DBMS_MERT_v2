@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Establish Relationships</title>
+</head>
+<body>
+    <h2>Establish Relationships</h2>
+
+
+    <form action="{{ url_for('establish_relationships') }}" method="post">
+        ALTER TABLE  
+        <label for="foreign_table"></label>
+        <select name="foreign_table" id="foreign_table">
+            {% for table_name, columns in table_info.items() %}
+                <option value="{{ table_name }}">{{ table_name }}</option>
+            {% endfor %}
+        </select>
+
+        
+        FOREIGN KEY 
+        <label for="foreign_column"></label>
+        <select name="foreign_column" id="foreign_column">
+            {% for table_name, columns in table_info.items() %}
+                {% for column in columns %}
+                    <option value="{{ column['Field'] }}">{{ column['Field'] }}</option>
+                    {% endfor %}  
+            {% endfor %}
+        </select>
+
+
+        REFERENCES
+
+        <label for="primary_table"> </label>
+        (
+        <select name="primary_table" id="primary_table">
+            {% for table_name, columns in table_info.items() %}
+                <option value="{{ table_name }}">{{ table_name }}</option>
+            {% endfor %}
+        </select>
+        )
+    
+        (
+           
+        <select name="primary_column" id="primary_column">
+            {% for table_name, columns in table_info.items() %}
+                {% for column in columns %}
+                    <option value="{{ column['Field'] }}">{{ column['Field'] }}</option>
+                    {% endfor %}  
+            {% endfor %}
+        </select>
+
+        )
+        <input type="submit" value="Create Relationship">
+    </form>
+    
+    <h2><a href="{{ url_for('show_tables') }}">Back to Tables</a></h2>
+</body>
+</html>
+{% endblock %}

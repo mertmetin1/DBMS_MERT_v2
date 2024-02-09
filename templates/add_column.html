@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Column</title>
+</head>
+<body>
+    <h1>Add Column to {{ table_name }}</h1>
+    <form action="{{ url_for('add_column', table_name=table_name,column_name=column_name,data_type=data_type) }}" method="POST">
+        <input type="submit" value="Add Column">
+        
+    <label for="column_name">Column Name:</label>
+    <input type="text" id="column_name" name="column_name" required><br>
+
+    <label for="data_type">Data Type:</label>
+    <select id="data_type" name="data_type">
+        {% for data_type in data_types %}
+            <option value="{{ data_type }}">{{ data_type }}</option>
+        {% endfor %}
+    </select><br>
+    </form>
+
+
+</body>
+</html>
+{% endblock %}

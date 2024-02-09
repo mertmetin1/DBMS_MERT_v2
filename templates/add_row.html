@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Row - {{ table_name }}</title>
+    <style>
+    .warning {
+        color: red;
+        font-size: 20px;
+        font-style: italic;
+        margin-left: 5px;
+    }
+    </style>
+</head>
+<body>
+    <h1>Add Row to {{ table_name }}</h1>
+    <br>
+    <span class="warning">(_id columns should be left empty)</span> <br>
+
+    <form action="{{ url_for('add_row', table_name=table_name) }}" method="POST">
+        {% for column in columns[1:] %}
+        <label for="{{ column }}">{{ column }}</label>
+        {% if column.endswith('_id') %}
+        (fk)
+        <select id="{{ column }}" name="{{ column }}">
+            <option value="">Seçiniz</option> <!-- Varsayılan bir seçenek -->
+            {% for foreign_row in foreign_rows.get(column, []) %}
+                {% for key, value in foreign_row.items() %}
+                    {% if loop.first %} {# Sadece ilk değeri al #}
+                        {% if value is not none %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </select><br>
+        
+        
+        
+        
+        
+        {% else %}
+            <input type="text" id="{{ column }}" name="{{ column }}"><br>
+        {% endif %}
+        {% endfor %}
+    
+        <input type="submit" value="Add Row">
+    </form>
+    
+    <a href="{{ url_for('view_table', table_name=table_name) }}">Back to Table</a>
+    
+</body>
+</html>
+{% endblock %}
