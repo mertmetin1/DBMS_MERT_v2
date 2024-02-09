@@ -5,8 +5,8 @@ def get_db_connection():
         # Set the database connection information
         db_name = 'mysql'
         db_host = 'localhost'
-        db_user = 'root'
-        db_password = '1324'
+        db_user = ''
+        db_password = ''
 
         conn = pymysql.connect(cursorclass=pymysql.cursors.DictCursor, charset='utf8mb4', host=db_host, user=db_user,
                                password=db_password, db=db_name)
