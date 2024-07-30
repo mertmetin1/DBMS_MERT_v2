@@ -1,0 +1,121 @@
+digraph ER_Diagram {
+	auth_group [label="auth_group
+id: int
+name: varchar(150)
+" shape=box]
+	auth_group_permissions [label="auth_group_permissions
+id: bigint
+group_id: int
+permission_id: int
+" shape=box]
+	auth_permission [label="auth_permission
+id: int
+name: varchar(255)
+content_type_id: int
+codename: varchar(100)
+" shape=box]
+	auth_user [label="auth_user
+id: int
+password: varchar(128)
+last_login: datetime(6)
+is_superuser: tinyint(1)
+username: varchar(150)
+first_name: varchar(150)
+last_name: varchar(150)
+email: varchar(254)
+is_staff: tinyint(1)
+is_active: tinyint(1)
+date_joined: datetime(6)
+" shape=box]
+	auth_user_groups [label="auth_user_groups
+id: bigint
+user_id: int
+group_id: int
+" shape=box]
+	auth_user_user_permissions [label="auth_user_user_permissions
+id: bigint
+user_id: int
+permission_id: int
+" shape=box]
+	bot_panel_client [label="bot_panel_client
+id: bigint
+name: varchar(100)
+surname: varchar(100)
+email: varchar(100)
+password: varchar(50)
+location: varchar(50)
+visa: tinyint(1)
+priority: int
+" shape=box]
+	django_admin_log [label="django_admin_log
+id: int
+action_time: datetime(6)
+object_id: longtext
+object_repr: varchar(200)
+action_flag: smallint unsigned
+change_message: longtext
+content_type_id: int
+user_id: int
+" shape=box]
+	django_content_type [label="django_content_type
+id: int
+app_label: varchar(100)
+model: varchar(100)
+" shape=box]
+	django_migrations [label="django_migrations
+id: bigint
+app: varchar(255)
+name: varchar(255)
+applied: datetime(6)
+" shape=box]
+	django_session [label="django_session
+session_key: varchar(40)
+session_data: longtext
+expire_date: datetime(6)
+" shape=box]
+	auth_group -> auth_group_permissions [label=id]
+	auth_group -> auth_permission [label=id]
+	auth_group -> auth_user [label=id]
+	auth_group -> auth_user_groups [label=id]
+	auth_group -> auth_user_user_permissions [label=id]
+	auth_group -> bot_panel_client [label=id]
+	auth_group -> django_admin_log [label=id]
+	auth_group -> django_content_type [label=id]
+	auth_group -> django_migrations [label=id]
+	auth_group_permissions -> auth_permission [label=id]
+	auth_group_permissions -> auth_user [label=id]
+	auth_group_permissions -> auth_user_groups [label=id]
+	auth_group_permissions -> auth_user_user_permissions [label=id]
+	auth_group_permissions -> bot_panel_client [label=id]
+	auth_group_permissions -> django_admin_log [label=id]
+	auth_group_permissions -> django_content_type [label=id]
+	auth_group_permissions -> django_migrations [label=id]
+	auth_permission -> auth_user [label=id]
+	auth_permission -> auth_user_groups [label=id]
+	auth_permission -> auth_user_user_permissions [label=id]
+	auth_permission -> bot_panel_client [label=id]
+	auth_permission -> django_admin_log [label=id]
+	auth_permission -> django_content_type [label=id]
+	auth_permission -> django_migrations [label=id]
+	auth_user -> auth_user_groups [label=id]
+	auth_user -> auth_user_user_permissions [label=id]
+	auth_user -> bot_panel_client [label=id]
+	auth_user -> django_admin_log [label=id]
+	auth_user -> django_content_type [label=id]
+	auth_user -> django_migrations [label=id]
+	auth_user_groups -> auth_user_user_permissions [label=id]
+	auth_user_groups -> bot_panel_client [label=id]
+	auth_user_groups -> django_admin_log [label=id]
+	auth_user_groups -> django_content_type [label=id]
+	auth_user_groups -> django_migrations [label=id]
+	auth_user_user_permissions -> bot_panel_client [label=id]
+	auth_user_user_permissions -> django_admin_log [label=id]
+	auth_user_user_permissions -> django_content_type [label=id]
+	auth_user_user_permissions -> django_migrations [label=id]
+	bot_panel_client -> django_admin_log [label=id]
+	bot_panel_client -> django_content_type [label=id]
+	bot_panel_client -> django_migrations [label=id]
+	django_admin_log -> django_content_type [label=id]
+	django_admin_log -> django_migrations [label=id]
+	django_content_type -> django_migrations [label=id]
+}

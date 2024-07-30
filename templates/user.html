@@ -12,7 +12,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            font-size: 12px; /* Tablo kartı font boyutu */
         }
 
         .container {
@@ -130,13 +130,20 @@
                     {% endfor %}
                 </select>
                 <label>Permissions:</label><br>
-                <input type="checkbox" id="select" name="select" value="SELECT">
-                <label for="select">Select</label><br>
-                <input type="checkbox" id="insert" name="insert" value="INSERT">
-                <label for="insert">Insert</label><br>
-                <input type="checkbox" id="update" name="update" value="UPDATE">
-                <label for="update">Update</label><br>
+                <div style="display: inline-block; margin-right: 10px;">
+                    <input type="checkbox" id="select" name="select" value="SELECT">
+                    <label for="select">Select</label><br>
+                </div>
+                <div style="display: inline-block; margin-right: 10px;">
+                    <input type="checkbox" id="insert" name="insert" value="INSERT">
+                    <label for="insert">Insert</label><br>
+                </div>
+                <div style="display: inline-block; margin-right: 10px;">
+                    <input type="checkbox" id="update" name="update" value="UPDATE">
+                    <label for="update">Update</label><br>
+                </div>
                 <input type="submit" value="Grant Permissions">
+                
             </form>
         </div>
 

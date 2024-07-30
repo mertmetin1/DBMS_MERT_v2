@@ -5,143 +5,115 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Tables</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* CSS Stil Tanımları */
-        .table-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+        /* Kendi CSS Stil Tanımları */
         .table-card {
-            flex: 1 1 300px; /* Esnek genişlik, minimum 300 piksel genişlik */
             border: 1px solid #ccc;
             border-radius: 5px;
-            padding: 20px;
             background-color: #f9f9f9;
+            font-size: 12px; /* Tablo kartı font boyutu */
+            margin-bottom: 20px; /* Tablo kartları arası boşluk */
         }
         .table-card h2 {
             margin-top: 0;
+            font-size: 16px; /* Tablo kartı başlık font boyutu */
         }
         .table-card ul {
-            margin: 0;
             padding: 0;
             list-style-type: none;
+            margin-bottom: 5px; /* UL'ler arası boşluk */
         }
         .table-card ul li {
-            margin-bottom: 10px;
+            font-size: 12px; /* Tablo kartı içeriği font boyutu */
         }
         .table-card table {
-            width: 100%;
-            border-collapse: collapse;
+            font-size: 10px; /* Tablo içeriği font boyutu */
         }
-        .table-card th, .table-card td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
+        .table-card td,
         .table-card th {
-            background-color: #f2f2f2;
+            padding: 5px; /* Tablo hücreleri arası boşluk */
         }
-
-        <style>
-            /* Existing CSS styles */
-            
-            /* Button Styles */
-            .btn {
-                padding: 10px 20px;
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                text-decoration: none;
-                display: inline-block;
-                transition: background-color 0.3s;
-            }
-        
-            .btn:hover {
-                background-color: #45a049;
-            }
-        
-            .delete-btn {
-                background-color: #f44336;
-            }
-        
-            .delete-btn:hover {
-                background-color: #da190b;
-            }
-        
-        
+        .btn {
+            font-size: 12px; /* Buton font boyutu */
+        }
     </style>
 </head>
 <body>
-
-    <h1>Tables Of DB - {{ database_name }}</h1>
-
-    <h2><a class="btn" href="{{ url_for('export_tables') }}">export table</a></h2>
-
-
-    <h2><a class="btn" href="{{ url_for('establish_relationships', primary_table='value', foreign_table='value', foreign_column='value', primary_column='value') }}">Establish Relationships</a></h2>
-
-    <h2><a class="btn" href="{{ url_for('add_table') }}">Add New Table</a></h2>
-    
-    <div class="table-container">
-        {% for table_name, columns in table_info.items() %}
-            <!-- Bilgi kartı başlangıcı -->
-            <div class="table-card">
-                <h2>Table: <a href="{{ url_for('view_table', table_name=table_name) }}">{{ table_name }}</a> Rows</h2>
-                
-                <ul>
-                    <li><a href="{{ url_for('edit_table_name', old_table_name=table_name) }}">Edit</a> / <a href="{{ url_for('delete_table', table_name=table_name) }}" onclick="return confirm('Are you sure you want to delete this table?')">Delete</a></li>
-                    <li><a href="{{ url_for('add_column', table_name=table_name) }}">Add Column</a></li>
-                </ul>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Column Name</th>
-                            <th>Data Type</th>
-                            <th>Relation</th>
-                            <th>Auto++</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for column in columns %}
-                            <tr>
-                                <td>{{ column['Field'] }}</td>
-                                <td>{{ column['Type'] }}</td>
-                                <td>
-                                    {% if column['Foreign Key Table'] %}
-                                        FK to ({{ column['Foreign Key Column'] }})
-                                    {% elif 'PRI' in column['Key'] %}
-                                        PRI
-                                    {% elif 'MUL' in column['Key'] %}
-                                        FK
-                                    {% else %}
-                                        -
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if 'auto_increment' in column['Extra'] %}
-                                        Yes
-                                    {% else %}
-                                        No
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    <a href="{{ url_for('edit_column', table_name=table_name, column_name=column['Field']) }}">Edit Column</a>
-                                    <form action="{{ url_for('delete_column', table_name=table_name, column_name=column['Field']) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this column?')">
-                                        <input type="submit" value="Delete Column">
-                                    </form>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+    <div class="container">
+        <h1 style="text-align: center;">{{ database_name }}</h1>
+        <div style="text-align: center;">
+            <h2 style="display: inline-block;"><a class="btn btn-primary" href="{{ url_for('download_diagram', database_name=database_name) }}"> DB Diagram</a></h2>
+            <h2 style="display: inline-block;"><a class="btn btn-success" href="{{ url_for('export_tables') }}">Export Table</a></h2>
+            <h2 style="display: inline-block;"><a class="btn btn-primary" href="{{ url_for('establish_relationships', primary_table='value', foreign_table='value', foreign_column='value', primary_column='value') }}">Establish Relationships</a></h2>
+            <h2 style="display: inline-block;"><a class="btn btn-primary" href="{{ url_for('add_table') }}">Add New Table</a></h2>
+        </div>
+        <div class="row">
+            {% for table_name, columns in table_info.items() %}
+            <div class="col">
+                <div class="table-card d-flex flex-column">
+                    <center><h2>{{ table_name }}</h2></center>
+                    <ul>
+                        <li>
+                            <a class="btn btn-primary" href="{{ url_for('view_table', table_name=table_name) }}">{{ table_name }} rows</a>
+                            <a class="btn btn-warning" href="{{ url_for('edit_table_name', old_table_name=table_name) }}">Edit Table</a>
+                            <a class="btn btn-sm btn-danger" href="{{ url_for('delete_table', table_name=table_name) }}" onclick="return confirm('Are you sure you want to delete this table?')">Delete Table</a>
+                            <a class="btn btn-success" href="{{ url_for('add_column', table_name=table_name) }}">Add Column</a>
+                        </li>
+                    </ul>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Column Name</th>
+                                    <th>Data Type</th>
+                                    <th>Relation</th>
+                                    <th>Auto++</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for column in columns %}
+                                <tr>
+                                    <td>{{ column['Field'] }}</td>
+                                    <td>{{ column['Type'] }}</td>
+                                    <td>
+                                        {% if column['Foreign Key Table'] %}
+                                            FK to ({{ column['Foreign Key Column'] }})
+                                        {% elif 'PRI' in column['Key'] %}
+                                            PRI
+                                        {% elif 'MUL' in column['Key'] %}
+                                            FK
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if 'auto_increment' in column['Extra'] %}
+                                            Yes
+                                        {% else %}
+                                            No
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div style="display: inline-block;">
+                                            <a class="btn btn-warning" href="{{ url_for('edit_column', table_name=table_name, column_name=column['Field']) }}">Edit</a>
+                                        </div>
+                                        <form action="{{ url_for('delete_column', table_name=table_name, column_name=column['Field']) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this column?')" style="display: inline-block;">
+                                            <input type="submit" value="Delete" class="btn btn-sm btn-danger">
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <!-- Bilgi kartı bitişi -->
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

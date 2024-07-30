@@ -1,0 +1,460 @@
+digraph ER_Diagram {
+	columns_priv [label="columns_priv
+Host: char(255)
+Db: char(64)
+User: char(32)
+Table_name: char(64)
+Column_name: char(64)
+Timestamp: timestamp
+Column_priv: set('Select','Insert','Update','References')
+" shape=box]
+	component [label="component
+component_id: int unsigned
+component_group_id: int unsigned
+component_urn: text
+" shape=box]
+	db [label="db
+Host: char(255)
+Db: char(64)
+User: char(32)
+Select_priv: enum('N','Y')
+Insert_priv: enum('N','Y')
+Update_priv: enum('N','Y')
+Delete_priv: enum('N','Y')
+Create_priv: enum('N','Y')
+Drop_priv: enum('N','Y')
+Grant_priv: enum('N','Y')
+References_priv: enum('N','Y')
+Index_priv: enum('N','Y')
+Alter_priv: enum('N','Y')
+Create_tmp_table_priv: enum('N','Y')
+Lock_tables_priv: enum('N','Y')
+Create_view_priv: enum('N','Y')
+Show_view_priv: enum('N','Y')
+Create_routine_priv: enum('N','Y')
+Alter_routine_priv: enum('N','Y')
+Execute_priv: enum('N','Y')
+Event_priv: enum('N','Y')
+Trigger_priv: enum('N','Y')
+" shape=box]
+	default_roles [label="default_roles
+HOST: char(255)
+USER: char(32)
+DEFAULT_ROLE_HOST: char(255)
+DEFAULT_ROLE_USER: char(32)
+" shape=box]
+	engine_cost [label="engine_cost
+engine_name: varchar(64)
+device_type: int
+cost_name: varchar(64)
+cost_value: float
+last_update: timestamp
+comment: varchar(1024)
+default_value: float
+" shape=box]
+	func [label="func
+name: char(64)
+ret: tinyint
+dl: char(128)
+type: enum('function','aggregate')
+" shape=box]
+	general_log [label="general_log
+event_time: timestamp(6)
+user_host: mediumtext
+thread_id: bigint unsigned
+server_id: int unsigned
+command_type: varchar(64)
+argument: mediumblob
+" shape=box]
+	global_grants [label="global_grants
+USER: char(32)
+HOST: char(255)
+PRIV: char(32)
+WITH_GRANT_OPTION: enum('N','Y')
+" shape=box]
+	gtid_executed [label="gtid_executed
+source_uuid: char(36)
+interval_start: bigint
+interval_end: bigint
+" shape=box]
+	help_category [label="help_category
+help_category_id: smallint unsigned
+name: char(64)
+parent_category_id: smallint unsigned
+url: text
+" shape=box]
+	help_keyword [label="help_keyword
+help_keyword_id: int unsigned
+name: char(64)
+" shape=box]
+	help_relation [label="help_relation
+help_topic_id: int unsigned
+help_keyword_id: int unsigned
+" shape=box]
+	help_topic [label="help_topic
+help_topic_id: int unsigned
+name: char(64)
+help_category_id: smallint unsigned
+description: text
+example: text
+url: text
+" shape=box]
+	innodb_index_stats [label="innodb_index_stats
+database_name: varchar(64)
+table_name: varchar(199)
+index_name: varchar(64)
+last_update: timestamp
+stat_name: varchar(64)
+stat_value: bigint unsigned
+sample_size: bigint unsigned
+stat_description: varchar(1024)
+" shape=box]
+	innodb_table_stats [label="innodb_table_stats
+database_name: varchar(64)
+table_name: varchar(199)
+last_update: timestamp
+n_rows: bigint unsigned
+clustered_index_size: bigint unsigned
+sum_of_other_index_sizes: bigint unsigned
+" shape=box]
+	password_history [label="password_history
+Host: char(255)
+User: char(32)
+Password_timestamp: timestamp(6)
+Password: text
+" shape=box]
+	plugin [label="plugin
+name: varchar(64)
+dl: varchar(128)
+" shape=box]
+	procs_priv [label="procs_priv
+Host: char(255)
+Db: char(64)
+User: char(32)
+Routine_name: char(64)
+Routine_type: enum('FUNCTION','PROCEDURE')
+Grantor: varchar(288)
+Proc_priv: set('Execute','Alter Routine','Grant')
+Timestamp: timestamp
+" shape=box]
+	proxies_priv [label="proxies_priv
+Host: char(255)
+User: char(32)
+Proxied_host: char(255)
+Proxied_user: char(32)
+With_grant: tinyint(1)
+Grantor: varchar(288)
+Timestamp: timestamp
+" shape=box]
+	replication_asynchronous_connection_failover [label="replication_asynchronous_connection_failover
+Channel_name: char(64)
+Host: char(255)
+Port: int unsigned
+Network_namespace: char(64)
+Weight: tinyint unsigned
+Managed_name: char(64)
+" shape=box]
+	replication_asynchronous_connection_failover_managed [label="replication_asynchronous_connection_failover_managed
+Channel_name: char(64)
+Managed_name: char(64)
+Managed_type: char(64)
+Configuration: json
+" shape=box]
+	replication_group_configuration_version [label="replication_group_configuration_version
+name: char(255)
+version: bigint unsigned
+" shape=box]
+	replication_group_member_actions [label="replication_group_member_actions
+name: char(255)
+event: char(64)
+enabled: tinyint(1)
+type: char(64)
+priority: tinyint unsigned
+error_handling: char(64)
+" shape=box]
+	role_edges [label="role_edges
+FROM_HOST: char(255)
+FROM_USER: char(32)
+TO_HOST: char(255)
+TO_USER: char(32)
+WITH_ADMIN_OPTION: enum('N','Y')
+" shape=box]
+	server_cost [label="server_cost
+cost_name: varchar(64)
+cost_value: float
+last_update: timestamp
+comment: varchar(1024)
+default_value: float
+" shape=box]
+	servers [label="servers
+Server_name: char(64)
+Host: char(255)
+Db: char(64)
+Username: char(64)
+Password: char(64)
+Port: int
+Socket: char(64)
+Wrapper: char(64)
+Owner: char(64)
+" shape=box]
+	slave_master_info [label="slave_master_info
+Number_of_lines: int unsigned
+Master_log_name: text
+Master_log_pos: bigint unsigned
+Host: varchar(255)
+User_name: text
+User_password: text
+Port: int unsigned
+Connect_retry: int unsigned
+Enabled_ssl: tinyint(1)
+Ssl_ca: text
+Ssl_capath: text
+Ssl_cert: text
+Ssl_cipher: text
+Ssl_key: text
+Ssl_verify_server_cert: tinyint(1)
+Heartbeat: float
+Bind: text
+Ignored_server_ids: text
+Uuid: text
+Retry_count: bigint unsigned
+Ssl_crl: text
+Ssl_crlpath: text
+Enabled_auto_position: tinyint(1)
+Channel_name: varchar(64)
+Tls_version: text
+Public_key_path: text
+Get_public_key: tinyint(1)
+Network_namespace: text
+Master_compression_algorithm: varchar(64)
+Master_zstd_compression_level: int unsigned
+Tls_ciphersuites: text
+Source_connection_auto_failover: tinyint(1)
+Gtid_only: tinyint(1)
+" shape=box]
+	slave_relay_log_info [label="slave_relay_log_info
+Number_of_lines: int unsigned
+Relay_log_name: text
+Relay_log_pos: bigint unsigned
+Master_log_name: text
+Master_log_pos: bigint unsigned
+Sql_delay: int
+Number_of_workers: int unsigned
+Id: int unsigned
+Channel_name: varchar(64)
+Privilege_checks_username: varchar(32)
+Privilege_checks_hostname: varchar(255)
+Require_row_format: tinyint(1)
+Require_table_primary_key_check: enum('STREAM','ON','OFF','GENERATE')
+Assign_gtids_to_anonymous_transactions_type: enum('OFF','LOCAL','UUID')
+Assign_gtids_to_anonymous_transactions_value: text
+" shape=box]
+	slave_worker_info [label="slave_worker_info
+Id: int unsigned
+Relay_log_name: text
+Relay_log_pos: bigint unsigned
+Master_log_name: text
+Master_log_pos: bigint unsigned
+Checkpoint_relay_log_name: text
+Checkpoint_relay_log_pos: bigint unsigned
+Checkpoint_master_log_name: text
+Checkpoint_master_log_pos: bigint unsigned
+Checkpoint_seqno: int unsigned
+Checkpoint_group_size: int unsigned
+Checkpoint_group_bitmap: blob
+Channel_name: varchar(64)
+" shape=box]
+	slow_log [label="slow_log
+start_time: timestamp(6)
+user_host: mediumtext
+query_time: time(6)
+lock_time: time(6)
+rows_sent: int
+rows_examined: int
+db: varchar(512)
+last_insert_id: int
+insert_id: int
+server_id: int unsigned
+sql_text: mediumblob
+thread_id: bigint unsigned
+" shape=box]
+	tables_priv [label="tables_priv
+Host: char(255)
+Db: char(64)
+User: char(32)
+Table_name: char(64)
+Grantor: varchar(288)
+Timestamp: timestamp
+Table_priv: set('Select','Insert','Update','Delete','Create','Drop','Grant','References','Index','Alter','Create View','Show view','Trigger')
+Column_priv: set('Select','Insert','Update','References')
+" shape=box]
+	time_zone [label="time_zone
+Time_zone_id: int unsigned
+Use_leap_seconds: enum('Y','N')
+" shape=box]
+	time_zone_leap_second [label="time_zone_leap_second
+Transition_time: bigint
+Correction: int
+" shape=box]
+	time_zone_name [label="time_zone_name
+Name: char(64)
+Time_zone_id: int unsigned
+" shape=box]
+	time_zone_transition [label="time_zone_transition
+Time_zone_id: int unsigned
+Transition_time: bigint
+Transition_type_id: int unsigned
+" shape=box]
+	time_zone_transition_type [label="time_zone_transition_type
+Time_zone_id: int unsigned
+Transition_type_id: int unsigned
+Offset: int
+Is_DST: tinyint unsigned
+Abbreviation: char(8)
+" shape=box]
+	user [label="user
+Host: char(255)
+User: char(32)
+Select_priv: enum('N','Y')
+Insert_priv: enum('N','Y')
+Update_priv: enum('N','Y')
+Delete_priv: enum('N','Y')
+Create_priv: enum('N','Y')
+Drop_priv: enum('N','Y')
+Reload_priv: enum('N','Y')
+Shutdown_priv: enum('N','Y')
+Process_priv: enum('N','Y')
+File_priv: enum('N','Y')
+Grant_priv: enum('N','Y')
+References_priv: enum('N','Y')
+Index_priv: enum('N','Y')
+Alter_priv: enum('N','Y')
+Show_db_priv: enum('N','Y')
+Super_priv: enum('N','Y')
+Create_tmp_table_priv: enum('N','Y')
+Lock_tables_priv: enum('N','Y')
+Execute_priv: enum('N','Y')
+Repl_slave_priv: enum('N','Y')
+Repl_client_priv: enum('N','Y')
+Create_view_priv: enum('N','Y')
+Show_view_priv: enum('N','Y')
+Create_routine_priv: enum('N','Y')
+Alter_routine_priv: enum('N','Y')
+Create_user_priv: enum('N','Y')
+Event_priv: enum('N','Y')
+Trigger_priv: enum('N','Y')
+Create_tablespace_priv: enum('N','Y')
+ssl_type: enum('','ANY','X509','SPECIFIED')
+ssl_cipher: blob
+x509_issuer: blob
+x509_subject: blob
+max_questions: int unsigned
+max_updates: int unsigned
+max_connections: int unsigned
+max_user_connections: int unsigned
+plugin: char(64)
+authentication_string: text
+password_expired: enum('N','Y')
+password_last_changed: timestamp
+password_lifetime: smallint unsigned
+account_locked: enum('N','Y')
+Create_role_priv: enum('N','Y')
+Drop_role_priv: enum('N','Y')
+Password_reuse_history: smallint unsigned
+Password_reuse_time: smallint unsigned
+Password_require_current: enum('N','Y')
+User_attributes: json
+" shape=box]
+	columns_priv -> db [label=Host]
+	columns_priv -> password_history [label=Host]
+	columns_priv -> procs_priv [label=Host]
+	columns_priv -> proxies_priv [label=Host]
+	columns_priv -> replication_asynchronous_connection_failover [label=Host]
+	columns_priv -> servers [label=Host]
+	columns_priv -> slave_master_info [label=Host]
+	columns_priv -> tables_priv [label=Host]
+	columns_priv -> user [label=Host]
+	db -> password_history [label=Host]
+	db -> procs_priv [label=Host]
+	db -> proxies_priv [label=Host]
+	db -> replication_asynchronous_connection_failover [label=Host]
+	db -> servers [label=Host]
+	db -> slave_master_info [label=Host]
+	db -> tables_priv [label=Host]
+	db -> user [label=Host]
+	default_roles -> global_grants [label=HOST]
+	engine_cost -> innodb_index_stats [label=last_update]
+	engine_cost -> innodb_table_stats [label=last_update]
+	engine_cost -> server_cost [label=cost_name]
+	func -> help_category [label=name]
+	func -> help_keyword [label=name]
+	func -> help_topic [label=name]
+	func -> plugin [label=name]
+	func -> replication_group_configuration_version [label=name]
+	func -> replication_group_member_actions [label=name]
+	general_log -> slow_log [label=user_host]
+	help_category -> help_keyword [label=name]
+	help_category -> help_topic [label=help_category_id]
+	help_category -> plugin [label=name]
+	help_category -> replication_group_configuration_version [label=name]
+	help_category -> replication_group_member_actions [label=name]
+	help_keyword -> help_relation [label=help_keyword_id]
+	help_keyword -> help_topic [label=name]
+	help_keyword -> plugin [label=name]
+	help_keyword -> replication_group_configuration_version [label=name]
+	help_keyword -> replication_group_member_actions [label=name]
+	help_relation -> help_topic [label=help_topic_id]
+	help_topic -> plugin [label=name]
+	help_topic -> replication_group_configuration_version [label=name]
+	help_topic -> replication_group_member_actions [label=name]
+	innodb_index_stats -> innodb_table_stats [label=database_name]
+	innodb_index_stats -> server_cost [label=last_update]
+	innodb_table_stats -> server_cost [label=last_update]
+	password_history -> procs_priv [label=Host]
+	password_history -> proxies_priv [label=Host]
+	password_history -> replication_asynchronous_connection_failover [label=Host]
+	password_history -> servers [label=Host]
+	password_history -> slave_master_info [label=Host]
+	password_history -> tables_priv [label=Host]
+	password_history -> user [label=Host]
+	plugin -> replication_group_configuration_version [label=name]
+	plugin -> replication_group_member_actions [label=name]
+	procs_priv -> proxies_priv [label=Host]
+	procs_priv -> replication_asynchronous_connection_failover [label=Host]
+	procs_priv -> servers [label=Host]
+	procs_priv -> slave_master_info [label=Host]
+	procs_priv -> tables_priv [label=Host]
+	procs_priv -> user [label=Host]
+	proxies_priv -> replication_asynchronous_connection_failover [label=Host]
+	proxies_priv -> servers [label=Host]
+	proxies_priv -> slave_master_info [label=Host]
+	proxies_priv -> tables_priv [label=Host]
+	proxies_priv -> user [label=Host]
+	replication_asynchronous_connection_failover -> replication_asynchronous_connection_failover_managed [label=Channel_name]
+	replication_asynchronous_connection_failover -> servers [label=Host]
+	replication_asynchronous_connection_failover -> slave_master_info [label=Channel_name]
+	replication_asynchronous_connection_failover -> slave_relay_log_info [label=Channel_name]
+	replication_asynchronous_connection_failover -> slave_worker_info [label=Channel_name]
+	replication_asynchronous_connection_failover -> tables_priv [label=Host]
+	replication_asynchronous_connection_failover -> user [label=Host]
+	replication_asynchronous_connection_failover_managed -> slave_master_info [label=Channel_name]
+	replication_asynchronous_connection_failover_managed -> slave_relay_log_info [label=Channel_name]
+	replication_asynchronous_connection_failover_managed -> slave_worker_info [label=Channel_name]
+	replication_group_configuration_version -> replication_group_member_actions [label=name]
+	servers -> slave_master_info [label=Host]
+	servers -> tables_priv [label=Host]
+	servers -> user [label=Host]
+	slave_master_info -> slave_relay_log_info [label=Number_of_lines]
+	slave_master_info -> slave_worker_info [label=Master_log_name]
+	slave_master_info -> tables_priv [label=Host]
+	slave_master_info -> user [label=Host]
+	slave_relay_log_info -> slave_worker_info [label=Relay_log_name]
+	tables_priv -> user [label=Host]
+	time_zone -> time_zone_name [label=Time_zone_id]
+	time_zone -> time_zone_transition [label=Time_zone_id]
+	time_zone -> time_zone_transition_type [label=Time_zone_id]
+	time_zone_leap_second -> time_zone_transition [label=Transition_time]
+	time_zone_name -> time_zone_transition [label=Time_zone_id]
+	time_zone_name -> time_zone_transition_type [label=Time_zone_id]
+	time_zone_transition -> time_zone_transition_type [label=Time_zone_id]
+}

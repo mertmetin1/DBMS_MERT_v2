@@ -7,9 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Establish Relationships</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h2>Establish Relationships</h2>
+    <center><h2>Establish Relationships</h2></center>
 
 
     <form action="{{ url_for('establish_relationships') }}" method="post">
@@ -55,10 +56,10 @@
         </select>
 
         )
-        <input type="submit" value="Create Relationship">
+        <input class="btn btn-success" type="submit" value="Create Relationship">
     </form>
     
-    <h2><a href="{{ url_for('show_tables') }}">Back to Tables</a></h2>
+    
 </body>
 </html>
 {% endblock %}

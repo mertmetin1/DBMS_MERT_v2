@@ -11,14 +11,20 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-     
-            display: flex;
+            
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
 
-  
+        .login-container {
+            
+            width: 300px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
         input[type="text"],
         input[type="password"],
@@ -47,17 +53,17 @@
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-        <form method="POST" action="/login">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="submit" value="Login">
-        </form>
-    </div>
+<center>    <div class="login-container">
+    <h2>Login</h2>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    <form method="POST" action="/login">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Login">
+    </form>
+</div></center>
 </body>
 </html>
 {% endblock %}

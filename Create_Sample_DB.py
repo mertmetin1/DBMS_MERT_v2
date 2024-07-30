@@ -5,8 +5,8 @@ def get_db_connection():
         # Set the database connection information
         db_name = 'mysql'
         db_host = 'localhost'
-        db_user = ''
-        db_password = ''
+        db_user = 'mert'
+        db_password = 'mert'
 
         conn = pymysql.connect(cursorclass=pymysql.cursors.DictCursor, charset='utf8mb4', host=db_host, user=db_user,
                                password=db_password, db=db_name)
@@ -162,7 +162,7 @@ conn = get_db_connection()
 
 if conn:
     # Create the database
-    create_database(conn,"python_travel2")
+    create_database(conn,"python_travel23")
 
     # Create tables
     create_tables(conn)
